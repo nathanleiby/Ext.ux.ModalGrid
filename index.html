@@ -1,0 +1,82 @@
+<html>
+<head>
+    <title>Modal Grid Sample</title>
+    <!-- Libraries, from Sencha CDN : http://senchaexamples.com/sencha-cdn/ -->
+    <link href="http://cdn.sencha.com/ext/gpl/4.2.0/resources/css/ext-all.css" rel="stylesheet" />
+    <script type="text/javascript" charset="utf-8" src="http://cdn.sencha.io/ext-4.2.0-gpl/ext-all.js"></script>
+
+    <!-- include modal grid code -->
+    <script type="text/javascript" src="ModalGrid.js"></script>
+    <script type="text/javascript" src="ModalGrid.js"></script>
+
+    <!-- include your javascript code here  -->
+    <script type="text/javascript">
+    Ext.onReady(function() {
+
+        // make sample array data
+        var sampleData = [
+            ['Monkey D Luffy', 'Captain', 'I will become the pirate king'],
+            ['Roronoa Zoro', 'Swordman', 'Become the greatest swordman']
+        ];
+
+        // create the data store
+        var store = Ext.create('Ext.data.ArrayStore', {
+            fields: [{
+                name: 'name'
+            }, {
+                name: 'position'
+            }, {
+                name: 'ambition'
+            }],
+            data: sampleData
+        });
+
+        // Use the same grid config across the two grids
+        var gridConfig = {
+            store: store,
+            cellEditor: Ext.create('Ext.grid.plugin.CellEditing', {
+                clicksToEdit: 1
+            }),
+            columns: [{
+                header: 'Name',
+                width: 100,
+                dataIndex: 'name',
+                editor: {
+                    xtype: 'textfield'
+                }
+            }, {
+                header: 'Position',
+                width: 100,
+                dataIndex: 'position',
+                editor: {
+                    xtype: 'textfield'
+                }
+            }, {
+                header: 'Ambition',
+                width: 250,
+                dataIndex: 'ambition',
+                editor: {
+                    xtype: 'textfield'
+                }
+            }],
+            stripeRows: true,
+            height: 180,
+            width: 800,
+            renderTo: 'grid-example',
+            title: 'Straw Hats Crew'
+        };
+
+        // create the grids, to compare their behavior
+        var gridRegular = Ext.create('Ext.grid.Panel', gridConfig);
+        var gridModal = Ext.create('Ext.ux.ModalGrid', gridConfig);
+    });
+    </script>
+</head>
+
+<body>
+
+    <!-- grid will render to this element -->
+    <div id="grid-example"></div>
+
+</body>
+</html>
